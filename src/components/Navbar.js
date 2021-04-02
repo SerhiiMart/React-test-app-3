@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
-import {Link} from 'react-router-dom';
-import {Button} from './Button';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -14,18 +14,23 @@ function Navbar() {
     (window.innerWidth<=960) ? setButton(false) : setButton(true);
   };
 
+  useEffect(() => {
+    showButton();
+  }, []);
+
   window.addEventListener('resize', showButton);
 
   return (
     <>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-logo"> 
-          SHMT <i className="fab fa-typo3"/>
+      <nav className='navbar'>
+        <div className='navbar-container'>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            SMTK
+            <i class='fab fa-typo3' />
           </Link>
-            <div className="menu-icon" onClick={handleClick}>
-              <i className={click ? "fas fa-times" : "fas fa-bars"} />
-            </div>
+          <div className='menu-icon' onClick={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               <li className='nav-item'>
                 <Link to='/' className='nav-links' onClick={closeMobileMenu}>
@@ -65,7 +70,7 @@ function Navbar() {
         </div>
       </nav>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
